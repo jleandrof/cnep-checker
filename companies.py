@@ -19,10 +19,20 @@ def get_timestamp():
 def get_cnep_status(cnpj):
     """ Get the status of the company in the cnep database
 
+    Example of company that is in cnep:
+
+        { "cnpj": "53949608000123" }
+
+    When requested, the above cnpj will return the information
+    about the sanctions the company received. Should the cnpj not
+    be present in the cnep database, a "Not in cnep database"
+    string will be used instead.
+
     :return:        goverment information from the cnep database
                     or "Not in cnep database".
     """
-    cnepStatus = requests.get('http://www.transparencia.gov.br/api-de-dados/cnep', params={'cnpjSancionado':cnpj}).json()
+    cnepStatus = requests.get('http://www.transparencia.gov.br/api-de-dados/cnep', 
+        params={'cnpjSancionado':cnpj}).json()
     if(not cnepStatus):
         cnepStatus = "Not in cnep database"
 
@@ -45,23 +55,27 @@ COMPANIES = {
 }
 
 def read_all():
-    """ Responds with a list of all companies
+    """ (GET) Responds with a list of all companies
     
     :return:        List of all the companies
     """
     return COMPANIES
 
 def read_one(cnpj):
-    """ Responds with data from one specific company
+    """ (GET) Responds with data from one specific company
 
     :return:        json structure of a company
 
     """
-    return COMPANIES[cnpj]
+    if(cnpj in COMPANIES.keys()):
+        return COMPANIES[cnpj]
+    else:
+        abort(
+            404, "Company not found"
+        )
 
 def get_totals_by_company():
-    """
-    List the companies along with the total sum of fines each
+    """ (GET) List the companies along with the total sum of fines each
     of them had to pay.
     :return:        list of companies
     """
@@ -78,8 +92,7 @@ def get_totals_by_company():
     return result
 
 def create(company):
-    """
-    Creates a new company on database.
+    """ (POST) Creates a new company on database.
     :param company:  company to be created
     :return:        201 on success, 406 if company already exists
     """
@@ -104,8 +117,7 @@ def create(company):
 
 
 def update(cnpj, company):
-    """
-    Update company information on database
+    """ (PUT) Update company information on database
     :param cnpj:   cnpj of company to delete
     :param company:  updated information of requested company
     :return:        updated company data
@@ -123,8 +135,7 @@ def update(cnpj, company):
 
 
 def delete(cnpj):
-    """
-    Remove a company from database.
+    """ (DELETE) Remove a company from database.
     :param cnpj:   cnpj of company to remove
     :return:        200 on successful delete, 404 if not found
     """

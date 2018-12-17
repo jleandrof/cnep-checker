@@ -37,6 +37,8 @@ paths:
                   type: string
                 timestamp:
                   type: string
+                cnepStatus:
+                  type: string
 
     post:
       operationId: companies.create
@@ -62,6 +64,23 @@ paths:
         201:
           description: Successfully created new company
 
+  /companies/get_totals_by_company:
+    get:
+      operationId: companies.get_totals_by_company
+      tags:
+        - Companies
+      summary: List company fines
+      description: List the total amount of fines from each company
+      responses:
+        200:
+          description: Successfully read the list
+          schema:
+            type: array
+            items:
+              properties:
+                name:
+                  type: string
+
   /companies/{cnpj}:
     get:
       operationId: companies.read_one
@@ -86,6 +105,8 @@ paths:
                 type: string
               timestamp:
                 type: string
+              cnepStatus:
+                type: string
 
     put:
       operationId: companies.update
@@ -104,8 +125,6 @@ paths:
           schema:
             type: object
             properties:
-              cnpj:
-                type: string
               name:
                 type: string
       responses:
