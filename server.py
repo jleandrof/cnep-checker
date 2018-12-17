@@ -1,3 +1,9 @@
+"""
+Server code
+
+Code also available at https://github.com/jleandrof/trabalho-sd
+"""
+
 from flask import render_template
 import connexion
 

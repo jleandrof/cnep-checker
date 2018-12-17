@@ -1,5 +1,7 @@
 """
 Module to represent a company database as well as the definitions of various HTTP methods to control it.
+
+Code also available at https://github.com/jleandrof/trabalho-sd
 """
 
 from datetime import datetime
