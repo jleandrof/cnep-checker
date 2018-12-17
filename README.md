@@ -10,9 +10,17 @@ These instructions will show how to get the project running in a local machine.
 
 This project was written in Python 3.7 and uses the Flask and Connexion web frameworks as well as Swagger to build and document the API.
 
+To handle some HTTP requests, the appropriately named Requests module was used.
+
 ### Installing Dependencies
 
 The easiest way to install the dependencies is using pip.
+
+#### Requests
+
+```
+pip install requests
+```
 
 #### Flask
 
