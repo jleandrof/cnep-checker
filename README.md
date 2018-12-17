@@ -39,4 +39,4 @@ The server can be started using the python interpreter.
 ```
 python server.py
 ```
-Once started, the server will listen to the default port 5000. Navegating to localhost:5000 will show the home.html page, which won't really have much to show. The swagger ui, though, will have the documentation of the API structured in a more organized manner. Just go to localhost:5000/api/ui, to see it.
+Once started, the server will listen to the default port 5000. Navegating to **localhost:5000** will show the home.html page, which won't really have much to show. The swagger ui, though, will have the documentation of the API structured in a more organized manner. Just go to **localhost:5000/api/ui**, to see it.
