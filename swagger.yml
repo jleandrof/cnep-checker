@@ -1,0 +1,128 @@
+swagger: "2.0"
+info:
+  description: API documentation of the server
+  version: "1.0.0"
+  title: AB1 Assignment
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /companies:
+    get:
+      operationId: companies.read_all
+      tags:
+        - Companies
+      summary: List all companies
+      description: List all companies
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of companies to get
+          required: false
+      responses:
+        200:
+          description: Successfully read the list
+          schema:
+            type: array
+            items:
+              properties:
+                name:
+                  type: string
+                cnpj:
+                  type: string
+                timestamp:
+                  type: string
+
+    post:
+      operationId: companies.create
+      tags:
+        - Companies
+      summary: Include new company
+      description: Add a new company to the list
+      parameters:
+        - name: company
+          in: body
+          description: Company to create
+          required: True
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the company
+              cnpj:
+                type: string
+                description: CNPJ of the new company (not formatted)
+      responses:
+        201:
+          description: Successfully created new company
+
+  /companies/{cnpj}:
+    get:
+      operationId: companies.read_one
+      tags:
+        - Companies
+      summary: Read one company from the companies list
+      description: Read one company from the companies list
+      parameters:
+        - name: cnpj
+          in: path
+          description: CNPJ of the company
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read company from companies list
+          schema:
+            properties:
+              name:
+                type: string
+              cnpj:
+                type: string
+              timestamp:
+                type: string
+
+    put:
+      operationId: companies.update
+      tags:
+        - Companies
+      summary: Update a company in the companies list
+      description: Update a company in the companies list
+      parameters:
+        - name: cnpj
+          in: path
+          description: CNPJ of company to be updated
+          type: string
+          required: True
+        - name: company
+          in: body
+          schema:
+            type: object
+            properties:
+              cnpj:
+                type: string
+              name:
+                type: string
+      responses:
+        200:
+          description: Successfully updated company in companies list
+
+    delete:
+      operationId: companies.delete
+      tags:
+        - Companies
+      summary: Delete a company from the companies list
+      description: Delete a company
+      parameters:
+        - name: cnpj
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a company from companies list
