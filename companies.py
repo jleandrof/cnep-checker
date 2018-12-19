@@ -120,7 +120,7 @@ def create(company):
 
 def update(cnpj, company):
     """ (PUT) Update company information on database
-    :param cnpj:   cnpj of company to delete
+    :param cnpj:   cnpj of company to update
     :param company:  updated information of requested company
     :return:        updated company data
     """
@@ -141,7 +141,6 @@ def delete(cnpj):
     :param cnpj:   cnpj of company to remove
     :return:        200 on successful delete, 404 if not found
     """
-    # Does the person to delete exist?
     if cnpj in COMPANIES:
         companyName = COMPANIES[cnpj]['name']
         del COMPANIES[cnpj]
