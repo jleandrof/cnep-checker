@@ -1,4 +1,4 @@
-# Trabalho AB1.1
+# CNEP Checker
 
 A company database manager that uses information from www.transparencia.gov.br to see if the companies are in the CNEP (Cadastro Nacional de Empresas Punidas).
 
